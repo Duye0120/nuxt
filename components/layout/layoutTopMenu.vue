@@ -29,13 +29,8 @@ const props = withDefaults(defineProps<{
 
 // 使用 toRef 来确保响应式
 const menuItems = computed(() => {
-  console.log('menuItems computed:', props.menuData)
   return props.menuData
 })
-
-watch(() => props.menuData, (newVal) => {
-  console.log('menuData changed:', newVal)
-}, { immediate: true })
 
 const emit = defineEmits<{
   'update:selectedKeys': [keys: string[]]

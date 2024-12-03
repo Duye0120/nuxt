@@ -1,75 +1,74 @@
-# Nuxt Minimal Starter
+# Nuxt_vue3_ts_pinia
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> 一个基于 Nuxt3 + Vue3 + TypeScript + Pinia 的前端框架
+>
+> 基于个人对react的理解,来学习vue+nuxt的使用
+>
+> 使用nuxt自带的servie作为一个后端的数据源,看看后期是否添加一下相关内容
+>
+> 前端ui目前使用antd-vue,后期会使用element-plus
+>
 
-## Setup
+## 遇到的问题
 
-Make sure to install dependencies:
+- antd-vue在刷新的时候会出现白屏,确切的说是css丢失,目前不知道是什么原因,但是可能是ssr的问题,待研究
 
-```bash
-# npm
-npm install
+- ssr在调用的时候需要注意,不要放在`onMounted`里面,不然会出现不调用问题,不能正确的显示我想要的内容
+  
+## 学习到的内容
 
-# pnpm
-pnpm install
+### vue相关
 
-# yarn
-yarn install
+- `defineEmits`
 
-# bun
-bun install
-```
+    个人理解,这个方法和`defineProps`的区别在于,`defineProps`是用来定义组件的属性,`defineEmits`是用来定义组件的事件
 
-## Development Server
+    可以直接用`@`来调用,不像`react`,所有的`props`都是用一个对象来解决的,只需要控制这个对象的`interface`即可
 
-Start the development server on `http://localhost:3000`:
+    `vue`里面主要是区分开了`defineProps`和`defineEmits`
 
-```bash
-# npm
-npm run dev
+   语法:
 
-# pnpm
-pnpm dev
+    ```js
+    const emit = defineEmits({
+        keyName: keyPropsType
+    })
+    ```
 
-# yarn
-yarn dev
+    用法:
 
-# bun
-bun run dev
-```
+    ```js
+    const emit = defineEmits<{
+        change: [id: number] 
+        update: [value: string]
+    }>()
+    ```
 
-## Production
+    约等于:
 
-Build the application for production:
+    ```js
+    const emit = defineEmits<{
+        (e: 'change', id: number): void
+        (e: 'update', value: string): void
+    }>()
+    ```
 
-```bash
-# npm
-npm run build
+- `ref`和`computed`
 
-# pnpm
-pnpm build
+    `ref`是用来定义一个响应式的变量,`computed`是用来定义一个计算属性
 
-# yarn
-yarn build
+    相比于`react`的`useState`,里面的value比较复杂,不像`react`的`useState`只是一个变量
 
-# bun
-bun run build
-```
+    包括`computed`也是,总是在不停的`.value`来赋予值和取值,希望后面可以看到有什么方法可以解决
 
-Locally preview production build:
+### nuxt相关
 
-```bash
-# npm
-npm run preview
+- service
 
-# pnpm
-pnpm preview
+    主要是使用了`defineEventHandler`来定义一个请求内容,然后`nuxt`在内部处理了,可以直接使用`useFetch`来获取数据
 
-# yarn
-yarn preview
+    但是如果你要是打开了`ssr`,那么就需要注意,不能写在`onMounted`里面,不然会出现不调用的问题
 
-# bun
-bun run preview
-```
+    虽然还没搞懂`useAsyncData`和`$fetch`已经`useFetch`的区别,但是基本上`useFetch`是`$fetch`的一个封装,`useAsyncData`是`useFetch`的一个封装
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+    ![diff about fetch function](assets/md/diff_about_fetch_function.png)
