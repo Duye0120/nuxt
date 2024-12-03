@@ -158,6 +158,7 @@ const goHome = () => {
 
 const topMenuClick = async (key: string) => {
   topSelectedKey.value = [key]
+  navigateTo(`/${key}`)
 }
 </script>
 
