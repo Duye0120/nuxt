@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-#__nuxt {
+
+html,body,#__nuxt {
   height: 100%;
   width: 100%;
   overflow: hidden;

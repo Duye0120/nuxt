@@ -2,8 +2,7 @@
   <a-menu
     v-model:selected-keys="selectedKeys"
     mode="horizontal"
-    :style="{ lineHeight: '64px' }"
-    @click="handleClick"
+    @menu-item-click="handleClick"
   >
     <a-menu-item
       v-for="item in menuItems"
@@ -42,7 +41,7 @@ const selectedKeys = computed({
   set: value => emit('update:selectedKeys', value),
 })
 
-const handleClick = ({ key }: { key: string }) => {
+const handleClick = (key: string) => {
   emit('menuClick', key)
 }
 </script>

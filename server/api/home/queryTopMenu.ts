@@ -5,6 +5,10 @@ interface MenuItem {
 
 const menu: MenuItem[] = [
   {
+    key: 'home',
+    label: '首页',
+  },
+  {
     key: 'study',
     label: '学习',
   },
