@@ -15,6 +15,5 @@ const menu: MenuItem[] = [
 ]
 
 export default defineEventHandler(() => {
-  console.log('🚀 ~ defineEventHandler ~ queryTopMenu was called')
   return { menu }
 })

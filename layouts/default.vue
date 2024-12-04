@@ -66,26 +66,39 @@
               option8
             </a-menu-item>
           </a-sub-menu>
-          <a-sub-menu key="sub3">
+          <a-menu-item-group
+            key="sub3"
+          >
             <template #title>
               <span>
                 <notification-outlined />
                 subnav 3
               </span>
             </template>
-            <a-menu-item key="9">
+            <a-menu-item
+              key="9"
+            >
               option9
             </a-menu-item>
-            <a-menu-item key="10">
+            <a-menu-item
+              key="10"
+              type="group"
+            >
               option10
             </a-menu-item>
-            <a-menu-item key="11">
+            <a-menu-item
+              key="11"
+              type="group"
+            >
               option11
             </a-menu-item>
-            <a-menu-item key="12">
+            <a-menu-item
+              key="12"
+              type="group"
+            >
               option12
             </a-menu-item>
-          </a-sub-menu>
+          </a-menu-item-group>
         </a-menu>
       </a-layout-sider>
       <a-layout class="p-[20px]">
@@ -118,11 +131,7 @@ const openKeys = ref<string[]>(['sub1'])
 const menuData = ref<any[]>([])
 const siderMenuData = ref<any[]>([])
 
-// const { data: topMenuData } = await useAsyncData('topMenu', () =>
-//   $fetch('/api/home/queryTopMenu'),
-// )
 const { data: topMenuData } = await useFetch('/api/home/queryTopMenu')
-console.log('🚀 ~ topMenuData:', topMenuData)
 
 watchEffect(async () => {
   if (topMenuData.value?.menu?.length) {
