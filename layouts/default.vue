@@ -21,7 +21,11 @@
         :trigger="null"
         collapsible
       >
-        <div>nocontent</div>
+        <LayoutSiderMenu
+          v-model:selected-keys="selectedKeys2"
+          v-model:open-keys="openKeys"
+          :side-data="siderMenuData"
+        />
       </a-layout-sider>
       <a-layout>
         <a-layout-content class="p-4">
@@ -35,6 +39,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import LayoutTopMenu from '~/components/layout/layoutTopMenu.vue'
+import LayoutSiderMenu from '~/components/layout/layoutSiderMenu.vue'
 
 const route = useRoute()
 const topSelectedKey = ref<string[]>([])
@@ -83,6 +88,10 @@ const topMenuClick = async (key: string) => {
     return navigateTo('/')
   }
   navigateTo(`/${key}/`)
+}
+
+const onSideMenuChange = (keys: string[], openKeys: string[]) => {
+  console.log(keys)
 }
 </script>
 
