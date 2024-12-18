@@ -42,8 +42,8 @@ import LayoutTopMenu from '~/components/layout/layoutTopMenu.vue'
 import LayoutSiderMenu from '~/components/layout/layoutSiderMenu.vue'
 
 const route = useRoute()
-const topSelectedKey = ref<string[]>([])
-const siderSelectedKeys = ref<string[]>(['1'])
+const topSelectedKey = ref<string[]>()
+const siderSelectedKeys = ref<string[]>()
 const openKeys = ref<string[]>(['sub1'])
 const menuData = ref<any[]>([])
 const siderMenuData = ref<any[]>([])
@@ -58,15 +58,21 @@ watchEffect(async () => {
 })
 
 watch(topSelectedKey, async () => {
-  await fetchSiderMenu(topSelectedKey.value[0])
+  await fetchSiderMenu(topSelectedKey?.value?.[0])
 },
 {
   immediate: true,
 },
 )
 
-watch(siderSelectedKeys, (keys) => {
-  console.log(keys)
+watch([siderSelectedKeys, openKeys], ([siderSelectedKeys, openKeys]) => {
+  if (!siderSelectedKeys?.length || !openKeys.length) return
+  const route = useRoute()
+  const path = route.path.split('/').filter(Boolean).join('/')
+  console.log('🚀 ~ watch ~ path:', path)
+  console.log('🚀 ~ watch ~ siderSelectedKeys:', siderSelectedKeys)
+  console.log('🚀 ~ watch ~ openKeys:', openKeys)
+  navigateTo(`/${path}/${openKeys[0]}/${siderSelectedKeys?.[0]}`)
 })
 
 async function fetchSiderMenu(key: string) {
@@ -92,10 +98,6 @@ const topMenuClick = async (key: string) => {
     return navigateTo('/')
   }
   navigateTo(`/${key}/`)
-}
-
-const onSideMenuChange = (keys: string[], openKeys: string[]) => {
-  console.log(keys)
 }
 </script>
 

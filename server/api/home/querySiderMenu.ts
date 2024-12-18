@@ -5,11 +5,11 @@ export default defineEventHandler(async (event) => {
       return {
         menu: [
           {
-            key: '0',
+            key: 'basic',
             title: '基础',
             icon: 'icon-apps',
             children: [
-              { key: '0_0', title: 'Menu 1' },
+              { key: 'other', title: '其他' },
               { key: '0_1', title: 'Menu 2' },
               { key: '0_2', title: 'Menu 3' },
               { key: '0_3', title: 'Menu 4' },
