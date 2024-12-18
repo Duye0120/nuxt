@@ -57,18 +57,9 @@ interface MenuItem {
 }
 
 const props = defineProps({
-  selectedKeys: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
-  openKeys: {
-    type: Array as PropType<string[]>,
-    default: () => [],
-  },
-  sideData: {
-    type: Array as PropType<MenuItem[]>,
-    default: () => [],
-  },
+  selectedKeys: Array as PropType<string[]>,
+  openKeys: Array as PropType<string[]>,
+  sideData: Array as PropType<MenuItem[]>,
 })
 
 const emit = defineEmits<{
@@ -76,39 +67,6 @@ const emit = defineEmits<{
   'update:openKeys': [value: string[]]
   'menuClick': [key: string]
 }>()
-
-const menuItems = computed<MenuItem[]>(() => [
-  {
-    key: '0',
-    title: 'Navigation 1',
-    icon: 'icon-apps',
-    children: [
-      { key: '0_0', title: 'Menu 1' },
-      { key: '0_1', title: 'Menu 2' },
-      { key: '0_2', title: 'Menu 3' },
-      { key: '0_3', title: 'Menu 4' },
-    ],
-  },
-  {
-    key: '1',
-    title: 'Navigation 2',
-    icon: 'icon-bug',
-    children: [
-      { key: '1_0', title: 'Menu 1' },
-      { key: '1_1', title: 'Menu 2' },
-      { key: '1_2', title: 'Menu 3' },
-    ],
-  },
-  {
-    key: '2',
-    title: 'Navigation 3',
-    icon: 'icon-bulb',
-    children: [
-      { key: '2_0', title: 'Menu 1' },
-      { key: '2_1', title: 'Menu 2' },
-    ],
-  },
-])
 
 const onMenuClick = (key: string) => {
   emit('update:selectedKeys', [key])

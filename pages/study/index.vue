@@ -1,6 +1,6 @@
 <template>
-  <div>
-    this is learn homepage
+  <div class="w-full h-full flex items-center justify-center">
+    please select left sider item
   </div>
 </template>
 
@@ -8,6 +8,5 @@
 
 </script>
 
-<style>
-
+<style scoped lang="less">
 </style>

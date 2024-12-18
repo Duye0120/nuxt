@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
         menu: [
           {
             key: '0',
-            title: 'Navigation 1',
+            title: '基础',
             icon: 'icon-apps',
             children: [
               { key: '0_0', title: 'Menu 1' },

@@ -22,7 +22,7 @@
         collapsible
       >
         <LayoutSiderMenu
-          v-model:selected-keys="selectedKeys2"
+          v-model:selected-keys="siderSelectedKeys"
           v-model:open-keys="openKeys"
           :side-data="siderMenuData"
         />
@@ -43,7 +43,7 @@ import LayoutSiderMenu from '~/components/layout/layoutSiderMenu.vue'
 
 const route = useRoute()
 const topSelectedKey = ref<string[]>([])
-const selectedKeys2 = ref<string[]>(['1'])
+const siderSelectedKeys = ref<string[]>(['1'])
 const openKeys = ref<string[]>(['sub1'])
 const menuData = ref<any[]>([])
 const siderMenuData = ref<any[]>([])
@@ -64,6 +64,10 @@ watch(topSelectedKey, async () => {
   immediate: true,
 },
 )
+
+watch(siderSelectedKeys, (keys) => {
+  console.log(keys)
+})
 
 async function fetchSiderMenu(key: string) {
   try {
