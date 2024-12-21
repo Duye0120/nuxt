@@ -20,19 +20,19 @@ interface MenuItem {
 }
 
 const props = withDefaults(defineProps<{
-  selectedKeys: string[]
+  selectedKeys: string[] | undefined
   menuData: MenuItem[]
 }>(), {
   menuData: () => [],
 })
 
-// 使用 toRef 来确保响应式
+// 通过computed把props里面的数据转换成响应式数据
 const menuItems = computed(() => {
   return props.menuData
 })
 
 const emit = defineEmits<{
-  'update:selectedKeys': [keys: string[]]
+  'update:selectedKeys': [keys: string[] | undefined]
   'menuClick': [key: string]
 }>()
 
